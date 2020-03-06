@@ -146,21 +146,7 @@ let app;
             $("#errorMessage").hide();
         }
 
-        function validateInput(selector, condition, errorMessage)
-        {
-            if(condition)
-            {
-                $("#errorMessage").show();
-                $("#errorMessage").text(errorMessage);
-                $(selector).select();
-                $(selector).css("border", "2px solid red");
-            }
-            else
-            {
-                $("#errorMessage").hide();
-                $(selector).css("border", "1px solid #ced4da");
-            }
-        }
+        
 
         $("#errorMessage").hide();
         $("#contactName").select();
@@ -323,21 +309,7 @@ let app;
         contentArea.appendChild(div);
         
         
-        function validateInput(selector, condition, errorMessage)
-{
-    if(condition)
-    {
-        $("#errorMessage").show();
-        $("#errorMessage").text(errorMessage);
-        $(selector).select();
-        $(selector).css("border", "2px solid red");
-    }
-    else
-    {
-        $("#errorMessage").hide();
-        $(selector).css("border", "1px solid #ced4da");
-    }
-}
+
       //hides the error message
         $("#errorMessage").hide();
         //when the site is loaded it sets the first entry point to firstname text box
@@ -385,8 +357,9 @@ let app;
 
         // Password Events length
         $("#password").blur((e)=>
-        {
-            validateInput("#password",( $("#password").val().length < 6 ),"Password is Too Short");
+        { 
+            //validates and checks if the password is min 6 characters
+            validateInput("#password",( $("#password").val().length < 6 ),"Password is too short must be more then 5 characters");
         });
 
         $("#password").focus((e)=>
@@ -397,6 +370,7 @@ let app;
         // confirm Password Events 
         $("#confirmPassword").blur((e)=>
         {
+            //validates and checks if the password is the same as the confirm password
             validateInput("#confirmPassword",( $("#confirmPassword").val() != $("#password").val() ),"confirm Password is not the same as password");
         });
 
@@ -406,34 +380,31 @@ let app;
         });
 
 
-
-
-
-
+        //submit button for register page
         $("#registerForm").submit  ((e)=>
         { 
           
 
-           
+           //stops default behaviour
             e.preventDefault();
             e.stopPropagation();
             
+            //takes the validated user information and sets it to variables
             let FirstName = $("#FirstName").val();
             let lastName = $("#lastName").val();
             let emailAddress = $("#emailAddress").val();
             let password = $("#password").val();
 
-
+            //adds the user data to the user class
             userObject.firstName = FirstName;
             userObject.lastName = lastName;
             userObject.email = emailAddress;
             userObject.password = password;
 
+            //outputs user class to the console
             console.log(userObject);
 
-            
-    
-
+            //resets the form
             $("#registerForm")[0].reset();
             
 
@@ -449,7 +420,23 @@ let app;
     {
        
     }
-    
+
+    //Function for validation
+    function validateInput(selector, condition, errorMessage)
+        {
+            if(condition)
+            {
+                $("#errorMessage").show();
+                $("#errorMessage").text(errorMessage);
+                $(selector).select();
+                $(selector).css("border", "2px solid red");
+            }
+            else
+            {
+                $("#errorMessage").hide();
+                $(selector).css("border", "1px solid #ced4da");
+            }
+        }
     
 
     window.addEventListener("load", Start);
