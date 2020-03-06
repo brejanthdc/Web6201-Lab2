@@ -1,0 +1,14 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "lab1 for webd6201",
+  "main": "app.js",
+  "author": "Brejanth Rajendran",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1"
+  }
+}
