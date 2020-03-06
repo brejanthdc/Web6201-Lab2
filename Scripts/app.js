@@ -265,17 +265,20 @@ let app;
         {
             // uses jquery to get the username from the login page
             let LoginName = $("#contactName").val();
+            let UserPassword = $("#password").val();
             
             //console.log(`Login Name: ${LoginName}`);
 
-            // creates a text value to inject into the nav bar
-            let LoginData= `<li id="UserName" class="nav-item"><a class="nav-link" href="#"> ${LoginName} </a></li>`;
+            //Only injects the username if password and username are filled in
+            if(LoginName.length > 0 && UserPassword.length > 0)
+            {
+                // creates a text value to inject into the nav bar
+                let LoginData= `<li id="UserName" class="nav-item"><a class="nav-link" href="#"> ${LoginName} </a></li>`;
+                //adds the username to the navbar
+                NavLink.innerHTML = LoginData;
+            }
            
-           //adds the username to the navbar
-            NavLink.innerHTML = LoginData;
-            //console.log(NavLink);
-
-
+         
            //stops default behaviour 
             e.preventDefault();
             e.stopPropagation();
