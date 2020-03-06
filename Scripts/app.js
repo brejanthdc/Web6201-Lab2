@@ -1,3 +1,9 @@
+//Name: Brejanth Rajendran
+//StudentId: 100557484
+//Date: 2020/03/06
+// WEBD6201-W2020-Lesson6 was used as a starter
+//https://github.com/durhamprogrammer/WEBD6201-W2020-Lesson6
+
 class Contact
 {
     constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
@@ -8,11 +14,13 @@ class Contact
         this.contactMessage = contactMessage;
     }
 }
-
+// class for a user
 class User
 {
+    //constructor that can accept firstname , last name, username, email , password
     constructor(firstName = "", lastName = "", username = "" , email = "" , password = "")
     {
+        
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -266,7 +274,7 @@ let app;
         // inserts the new link with the username before contact us tab
         Contactlink.parentNode.insertBefore(NavLink,Contactlink);
 
-
+        //when the submit buttton is clicked
         $("#loginForm").submit  ((e)=>
         {
             // uses jquery to get the username from the login page
@@ -282,12 +290,12 @@ let app;
             //console.log(NavLink);
 
 
-           
+           //stops default behaviour 
             e.preventDefault();
             e.stopPropagation();
             
            
-            
+            //resets the form 
             $("#loginForm")[0].reset();
             $("#login").hide();
             $("#logout").show();
@@ -302,11 +310,16 @@ let app;
     {
         document.title = "WEBD6201 - Register";
 
+        // creates a blank div statement
         let div = document.createElement("div");
+
         //div.setAttribute("class","alert alert-danger");
         HiddenDivText = '<div id="errorMessage" class="alert alert-danger"> </div>';
+
+        //adds the class and errormessage id to the empty div
         div.innerHTML = HiddenDivText;
-        console.log(div);
+        
+        //adds the new div to the main content area, more spefically to the bottom
         contentArea.appendChild(div);
         
         
@@ -325,19 +338,21 @@ let app;
         $(selector).css("border", "1px solid #ced4da");
     }
 }
-      
+      //hides the error message
         $("#errorMessage").hide();
+        //when the site is loaded it sets the first entry point to firstname text box
         $("#FirstName").select();
-        //above not needed
+        
 
 
 
         // First Name Events
         $("#FirstName").blur((e)=>
         {
-            validateInput("#FirstName",( $("#FirstName").val().length < 2),"First Name is Too Short");
+            //validates and checks if the first name is min 2 character 
+            validateInput("#FirstName",( $("#FirstName").val().length < 2),"First name must be more then 1 character");
         });
-
+        // if an error occurs sets the focus back to first name text box
         $("#FirstName").focus((e)=>
         {
             $("#FirstName").select();
@@ -347,7 +362,8 @@ let app;
         // Last Name Events
         $("#lastName").blur((e)=>
         {
-            validateInput("#lastName",( $("#lastName").val().length < 2),"Last Name is Too Short");
+            //validates and checks if the last name is min 2 character 
+            validateInput("#lastName",( $("#lastName").val().length < 2),"Last name must be more then 1 character");
         });
 
         $("#lastName").focus((e)=>
@@ -355,16 +371,17 @@ let app;
             $("#lastName").select();
         });
 
-        // Email Events
+        // Email Events length
         $("#emailAddress").blur((e)=>
-        {
-            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address: missing @ symbol or must be greater then 8 characthers");
+        { //validates and checks if the email address is more then 8 characters and if it contains @ symbol
+            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address: must be minimum 8 characters and have a @ symbol ");
         });
 
         $("#emailAddress").focus((e)=>
         {
             $("#emailAddress").select();
         });
+        
 
         // Password Events length
         $("#password").blur((e)=>
