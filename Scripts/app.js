@@ -9,6 +9,17 @@ class Contact
     }
 }
 
+class User
+{
+    constructor(firstName = "", lastName = "", username = "" , email = "" , password = "")
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+}
 
 
 
@@ -22,6 +33,9 @@ let app;
     // Declare Function Variables here...
     console.log("%cDeclaring Variables", "color: red;")
     let contactObject = new Contact();
+
+    let userObject = new User();
+
 
     /**
      * Variable initialization in this function
@@ -217,6 +231,7 @@ let app;
             contactObject.contactMessage = contactMessage;
 
             console.log(contactObject);
+            
 
             clearForm();
         });
@@ -288,11 +303,95 @@ let app;
         document.title = "WEBD6201 - Register";
 
         let div = document.createElement("div");
-        div.setAttribute("class","alert alert-danger");
-        //innerHTML ='id="errorMessage" class="alert alert-danger"> This is where the error message goes...' ;
+        //div.setAttribute("class","alert alert-danger");
+        HiddenDivText = '<div id="errorMessage" class="alert alert-danger"> </div>';
+        div.innerHTML = HiddenDivText;
         console.log(div);
         contentArea.appendChild(div);
+        
+        
+        function validateInput(selector, condition, errorMessage)
+{
+    if(condition)
+    {
+        $("#errorMessage").show();
+        $("#errorMessage").text(errorMessage);
+        $(selector).select();
+        $(selector).css("border", "2px solid red");
+    }
+    else
+    {
+        $("#errorMessage").hide();
+        $(selector).css("border", "1px solid #ced4da");
+    }
+}
       
+        $("#errorMessage").hide();
+        $("#FirstName").select();
+        //above not needed
+
+
+
+        // First Name Events
+        $("#FirstName").blur((e)=>
+        {
+            validateInput("#FirstName",( $("#FirstName").val().length < 2),"First Name is Too Short");
+        });
+
+        $("#FirstName").focus((e)=>
+        {
+            $("#FirstName").select();
+        });
+
+
+        // Last Name Events
+        $("#lastName").blur((e)=>
+        {
+            validateInput("#lastName",( $("#lastName").val().length < 2),"Last Name is Too Short");
+        });
+
+        $("#lastName").focus((e)=>
+        {
+            $("#lastName").select();
+        });
+
+        // Email Events
+        $("#emailAddress").blur((e)=>
+        {
+            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address: missing @ symbol or must be greater then 8 characthers");
+        });
+
+        $("#emailAddress").focus((e)=>
+        {
+            $("#emailAddress").select();
+        });
+
+        // Password Events length
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",( $("#password").val().length < 6 ),"Password is Too Short");
+        });
+
+        $("#password").focus((e)=>
+        {
+            $("#password").select();
+        });
+
+        // confirm Password Events 
+        $("#confirmPassword").blur((e)=>
+        {
+            validateInput("#confirmPassword",( $("#confirmPassword").val() != $("#password").val() ),"confirm Password is not the same as password");
+        });
+
+        $("#confirmPassword").focus((e)=>
+        {
+            $("#confirmPassword").select();
+        });
+
+
+
+
+
 
         $("#registerForm").submit  ((e)=>
         { 
@@ -302,8 +401,23 @@ let app;
             e.preventDefault();
             e.stopPropagation();
             
-           
+            let FirstName = $("#FirstName").val();
+            let lastName = $("#lastName").val();
+            let emailAddress = $("#emailAddress").val();
+            let password = $("#password").val();
+
+
+            userObject.firstName = FirstName;
+            userObject.lastName = lastName;
+            userObject.email = emailAddress;
+            userObject.password = password;
+
+            console.log(userObject);
+
+            
     
+
+            $("#registerForm")[0].reset();
             
 
         });
